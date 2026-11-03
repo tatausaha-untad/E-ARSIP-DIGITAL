@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>E-ARSIP DIGITAL | Universitas Tadulako</title>
+
+    <!-- SEO & berbagi tautan -->
+    <meta
+      name="description"
+      content="E-ARSIP DIGITAL: Arsip Digital Tata Usaha &amp; Keprotokoleran Rektorat UNTAD &amp; Biro Keuangan dan Umum, Universitas Tadulako."
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="E-ARSIP DIGITAL | Universitas Tadulako"
+    />
+    <meta
+      property="og:description"
+      content="Tata Usaha &amp; Keprotokoleran, Biro Keuangan dan Umum, Universitas Tadulako."
+    />
+    <meta property="og:image" content="logo.jpg" />
+
+    <!-- Ikon -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <!-- Percepat koneksi ke Google Apps Script -->
+    <link rel="preconnect" href="https://script.google.com" crossorigin />
+    <link rel="dns-prefetch" href="https://script.google.com" />
+
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #1f2933;
+        --muted: #5f6b76;
+        --accent: #1a56a0;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bg);
+        overflow: hidden;
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          Arial,
+          sans-serif;
+        color: var(--ink);
+      }
+
+      .app {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100vh; /* cadangan untuk browser lama */
+        height: 100dvh;
+      }
+
+      iframe {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: #fff;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      iframe.ready {
+        opacity: 1;
+      }
+
+      /* Layar muat */
+      .loader {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        padding: 24px;
+        text-align: center;
+        background: var(--bg);
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
+
+      .loader.done {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .loader img {
+        width: 96px;
+        height: 96px;
+        object-fit: contain;
+      }
+
+      .spinner {
+        width: 30px;
+        height: 30px;
+        border: 3px solid #d3d9df;
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      .loader p {
+        margin: 0;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      .loader small {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+
+      .fallback {
+        display: none;
+        max-width: 340px;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+
+      .fallback.show {
+        display: block;
+      }
+
+      .fallback a {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 10px 18px;
+        border-radius: 8px;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .fallback a:focus-visible {
+        outline: 3px solid #9cc2f0;
+        outline-offset: 2px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .spinner {
+          animation-duration: 2.5s;
+        }
+        iframe,
+        .loader {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="app">
+      <div class="loader" id="loader" role="status" aria-live="polite">
+        <img
+          src="logo.jpg"
+          alt="Logo Universitas Tadulako"
+          width="96"
+          height="96"
+        />
+        <div class="spinner" aria-hidden="true"></div>
+        <p>
+          Memuat E-ARSIP DIGITAL<br />
+          <small
+            >Tata Usaha &amp; Keprotokoleran · Biro Keuangan dan Umum<br />Universitas
+            Tadulako</small
+          >
+        </p>
+        <div class="fallback" id="fallback">
+          Pemuatan lebih lama dari biasanya. Periksa koneksi internet, atau buka
+          aplikasi di tab baru.
+          <br />
+          <a id="openLink" href="#" target="_blank" rel="noopener noreferrer"
+            >Buka di tab baru</a
+          >
+        </div>
+      </div>
+
+      <iframe
+        id="app"
+        title="E-ARSIP DIGITAL Universitas Tadulako"
+        src="https://script.google.com/macros/s/AKfycbx2pMUluRwKveriD-0LwPnWhPp0av4nBvRdvMoze_boifujEVxZJx2-Z8yryGzh5PEI/exec"
+        allow="clipboard-write; fullscreen"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+
+      <noscript>
+        <div class="loader">
+          <p>
+            Aplikasi membutuhkan JavaScript.
+            <a
+              href="https://script.google.com/macros/s/AKfycbx2pMUluRwKveriD-0LwPnWhPp0av4nBvRdvMoze_boifujEVxZJx2-Z8yryGzh5PEI/exec"
+              >Buka aplikasi langsung</a
+            >.
+          </p>
+        </div>
+      </noscript>
+    </main>
+
+    <script>
+      (function () {
+        var frame = document.getElementById("app");
+        var loader = document.getElementById("loader");
+        var fallback = document.getElementById("fallback");
+        var openLink = document.getElementById("openLink");
+
+        openLink.href = frame.getAttribute("src");
+
+        function showApp() {
+          frame.classList.add("ready");
+          loader.classList.add("done");
+          clearTimeout(timer);
+        }
+
+        // Jika terlalu lama, tampilkan tautan cadangan
+        var timer = setTimeout(function () {
+          fallback.classList.add("show");
+        }, 12000);
+
+        frame.addEventListener("load", showApp);
+      })();
+    </script>
+  </body>
+</html>
